@@ -7,8 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.maia.course.domain.Request;
-import com.maia.course.domain.RequestStage;
 import com.maia.course.domain.User;
+import com.maia.course.domain.enums.RequestState;
 
 @Repository
 public interface RequestRepository extends JpaRepository<Request, Long> {
@@ -21,7 +21,7 @@ public interface RequestRepository extends JpaRepository<Request, Long> {
 	
 	/* ATUALIZANDO O ESTATDO DO PEDIDO*/
 	@Query("UPDATE Request SET state = ?2 WHERE id = ?1")
-	public Request updateStatus(Long id, RequestStage state);
+	public Request updateStatus(Long id, RequestState state);
 		
 	
 
