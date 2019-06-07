@@ -20,8 +20,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	/* Buscar por email e senha =  neste caso para fazer o login*/
 	public User findByEmailAndPassword(String email, String senha);
 	
-	/* Buscar por email e senha =  neste caso para fazer o login*/
-	@Query("SELECT FROM User WHERE email = ?1 AND password = 2?")
+	/* Buscar por email e senha =  neste caso para fazer o login */
+	@Query("SELECT u FROM User u WHERE u.email = ?1 AND u.password = ?2")
 	public Optional<User> login(String email, String password);
 
 
