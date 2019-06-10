@@ -14,14 +14,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.maia.course.domain.Request;
+import com.maia.course.domain.RequestStage;
 import com.maia.course.service.RequestService;
+import com.maia.course.service.RequestStateService;
 
 @RestController
-@RequestMapping("/requests")
+@RequestMapping(value = "requests")
 public class RequestResources {
 
 	@Autowired
 	private RequestService service;
+
+	@Autowired
+	private RequestStateService statSservice;
 
 	// save
 	@PostMapping
@@ -50,6 +55,15 @@ public class RequestResources {
 	public ResponseEntity<List<Request>> getAlls() {
 		List<Request> objs = service.getAll();
 		return ResponseEntity.ok(objs);
+	}
+
+	// find request stage for id request
+	// exc:http://meusite/requests/id/requests-stages
+	@GetMapping("/{id}/request-stages")
+	public ResponseEntity<List<RequestStage>> listAllStageByIdRequest(@PathVariable(name = "id") Long id) {
+		List<RequestStage> stages = statSservice.getAllByRequestId(id);
+		return ResponseEntity.ok(stages);
+
 	}
 
 }
