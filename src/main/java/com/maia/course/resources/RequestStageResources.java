@@ -1,4 +1,4 @@
-package com.maia.course.resorces;
+package com.maia.course.resources;
 
 public class RequestStageResources {
 

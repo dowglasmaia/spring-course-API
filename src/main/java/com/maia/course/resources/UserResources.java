@@ -1,4 +1,4 @@
-package com.maia.course.resorces;
+package com.maia.course.resources;
 
 import java.util.List;
 
@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.maia.course.domain.Request;
 import com.maia.course.domain.User;
 import com.maia.course.domain.dto.UserLoginDTO;
+import com.maia.course.service.RequestService;
 import com.maia.course.service.UserService;
 
 @RestController
@@ -24,6 +26,9 @@ public class UserResources {
 
 	@Autowired
 	private UserService service;
+
+	@Autowired
+	private RequestService reqService;
 
 	// save
 	@PostMapping
@@ -60,6 +65,14 @@ public class UserResources {
 	public ResponseEntity<User> login(@RequestBody UserLoginDTO user) {
 		User loggedUser = service.login(user.getEmail(), user.getPassword());
 		return ResponseEntity.ok(loggedUser);
+	}
+
+	// find request for id user
+	@GetMapping("/{id}/requests")
+	public ResponseEntity<List<Request>> listAllRequestByIdUser(@PathVariable(name = "id") Long id) {
+		List<Request> list = reqService.getAllByUser(id);
+		return ResponseEntity.ok(list);
+
 	}
 
 }
