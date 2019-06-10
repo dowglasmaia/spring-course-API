@@ -16,11 +16,6 @@ import javax.persistence.ManyToOne;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.maia.course.domain.enums.RequestState;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 @Entity
 public class RequestStage implements Serializable {
 	private static final long serialVersionUID = 1L;
