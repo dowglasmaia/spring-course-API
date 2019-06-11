@@ -29,7 +29,7 @@ public class RequestStateService {
 		Long requestId = obj.getRequest().getId();
 		RequestState state = obj.getState();
 
-		requestRepository.updateStatus(requestId, state); // atualiza o estagio do Pedido
+		//requestRepository.updateStatus(requestId, state); // atualiza o estagio do Pedido
 
 		return createdStage;
 	}

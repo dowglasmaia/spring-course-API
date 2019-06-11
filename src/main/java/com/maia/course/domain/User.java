@@ -13,12 +13,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.maia.course.domain.enums.Role;
-
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
 public class User implements Serializable {
@@ -34,16 +31,18 @@ public class User implements Serializable {
 	@Column(length = 80, nullable = false, unique = true)
 	private String email;
 
-	@Column(length = 12, nullable = false)
+	@Column(length = 80, nullable = false)
 	private String password;
 
 	@Column(length = 20, nullable = false)
 	@Enumerated(EnumType.STRING)
 	private Role role;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "user") // 01 usuario pode ter varios Pedidos( 01 p/ *)
 	private List<Request> requests = new ArrayList<>();
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "user")
 	private List<RequestStage> stages = new ArrayList<>();
 
@@ -84,10 +83,12 @@ public class User implements Serializable {
 		this.email = email;
 	}
 
+	@JsonIgnore
 	public String getPassword() {
 		return password;
 	}
 
+	@JsonProperty
 	public void setPassword(String password) {
 		this.password = password;
 	}

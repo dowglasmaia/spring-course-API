@@ -18,18 +18,24 @@ public class UserService {
 
 	// Save
 	public User save(User obj) {
-		String hash = HashUtil.getSecuretHash(obj.getPassword());
-		obj.setPassword(hash);
-		User createdUser = repository.save(obj);
-		return createdUser;
+		try {
+			String hash = HashUtil.getSecuretHash(obj.getPassword());
+			obj.setPassword(hash);
+			return repository.save(obj);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("Operação Falhou" + e.getMessage());
+		}
+
 	}
 
 	// update
 	public User update(User obj) {
 		String hash = HashUtil.getSecuretHash(obj.getPassword());
 		obj.setPassword(hash);
-		User updateUser = repository.save(obj);
-		return updateUser;
+
+		return repository.save(obj);
 	}
 
 	// getById
@@ -46,7 +52,7 @@ public class UserService {
 
 	// Login
 	public User login(String email, String password) {
-		password = HashUtil.getSecuretHash(password);		
+		password = HashUtil.getSecuretHash(password);
 		Optional<User> result = repository.login(email, password);
 		return result.get();
 	}

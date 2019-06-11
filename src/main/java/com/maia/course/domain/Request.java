@@ -17,6 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.maia.course.domain.enums.RequestState;
 
 @Entity
@@ -45,8 +46,9 @@ public class Request implements Serializable {
 	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "request")
-	private List<RequestStage> states = new ArrayList<>();
+	private List<RequestStage> stages = new ArrayList<>();
 
 	public Request() {
 		// TODO Auto-generated constructor stub
@@ -110,12 +112,12 @@ public class Request implements Serializable {
 		this.user = user;
 	}
 
-	public List<RequestStage> getStates() {
-		return states;
+	public List<RequestStage> getStages() {
+		return stages;
 	}
 
-	public void setStates(List<RequestStage> states) {
-		this.states = states;
+	public void setStages(List<RequestStage> stages) {
+		this.stages = stages;
 	}
 
 }
