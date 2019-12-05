@@ -6,8 +6,7 @@ import org.springframework.stereotype.Component;
 import com.maia.course.service.util.HashUtil;
 
 @Component
-public class CustomPasswordEnconder implements PasswordEncoder{
-	
+public class CustomPasswordEnconder implements PasswordEncoder{	
 
 	@Override
 	public String encode(CharSequence rawPassword) {

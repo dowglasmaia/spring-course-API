@@ -1,11 +1,18 @@
 package com.maia.course.resources;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.Optional;import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -20,6 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.maia.course.domain.Request;
 import com.maia.course.domain.Usuario;
 import com.maia.course.domain.dto.UserLoginDTO;
+import com.maia.course.security.JwtManager;
 import com.maia.course.service.RequestService;
 import com.maia.course.service.UserService;
 
@@ -27,11 +35,11 @@ import com.maia.course.service.UserService;
 @RequestMapping(value = "users")
 public class UserResources {
 
-	@Autowired
-	private UserService service;
-
-	@Autowired
-	private RequestService reqService;
+	@Autowired private UserService service;
+	@Autowired private RequestService reqService;
+	@Autowired private AuthenticationManager authManager;
+	@Autowired private JwtManager jwtmanager;
+	
 
 	// save
 	@PostMapping
@@ -65,9 +73,23 @@ public class UserResources {
 
 	// login
 	@PostMapping("/login")
-	public ResponseEntity<Usuario> login(@RequestBody UserLoginDTO user) {
-		Usuario loggedUser = service.login(user.getEmail(), user.getPassword());
-		return ResponseEntity.ok(loggedUser);
+	public ResponseEntity<String> login(@RequestBody UserLoginDTO user) {
+		
+		UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword());		
+		Authentication auth = authManager.authenticate(token);
+		
+		SecurityContextHolder.getContext().setAuthentication(auth);	
+		
+		User userSS = (User) auth.getPrincipal();
+		
+		String email = userSS.getUsername();
+		List<String> roles = userSS.getAuthorities()
+							.stream()
+							.map(authority -> authority.getAuthority())
+							.collect(Collectors.toList());
+		
+		String jwt = jwtmanager.createToken(email, roles);		
+		return ResponseEntity.ok(jwt);
 	}
 
 	// find request for id user
