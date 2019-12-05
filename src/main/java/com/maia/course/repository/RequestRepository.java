@@ -7,14 +7,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.maia.course.domain.Request;
-import com.maia.course.domain.User;
+import com.maia.course.domain.Usuario;
 import com.maia.course.domain.enums.RequestState;
 
 @Repository
 public interface RequestRepository extends JpaRepository<Request, Long> {
 	
 	/* Buscar por nome*/
-	public User findByDescription( String name);
+	public Usuario findByDescription( String name);
 	
 	/*Buscar todos os Pedidos com base no Id do Usuario*/
 	public List<Request>findAllByUserId(Long id);

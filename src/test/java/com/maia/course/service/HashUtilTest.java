@@ -13,11 +13,11 @@ public class HashUtilTest {
 
 	@Test
 	public void getHash() {
-		String hash = HashUtil.getSecuretHash("123");
+		String hash = HashUtil.getSecuretHash("123456789");
 		
 		System.out.println("Hash: " + hash);
 
-		assertThat(hash.length()).isEqualTo(64);
+		assertThat(hash.length()).isEqualTo(32);
 	}
 
 }

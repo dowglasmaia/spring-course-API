@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.maia.course.domain.enums.Role;
 
 @Entity
-public class User implements Serializable {
+public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -46,11 +46,11 @@ public class User implements Serializable {
 	@OneToMany(mappedBy = "user")
 	private List<RequestStage> stages = new ArrayList<>();
 
-	public User() {
+	public Usuario() {
 
 	}
 
-	public User(Long id, String name, String email, String password, Role role) {
+	public Usuario(Long id, String name, String email, String password, Role role) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -133,7 +133,7 @@ public class User implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		Usuario other = (Usuario) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

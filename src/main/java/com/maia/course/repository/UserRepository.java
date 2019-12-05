@@ -6,23 +6,23 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.maia.course.domain.User;
+import com.maia.course.domain.Usuario;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository<Usuario, Long> {
 	
 	/* Buscar por nome*/
-	public User findByName( String name);
+	public Usuario findByName( String name);
 	
 	/* Buscar por email*/
-	public User findByEmail( String email);
+	public Optional<Usuario> findByEmail( String email);
 	
 	/* Buscar por email e senha =  neste caso para fazer o login*/
-	public User findByEmailAndPassword(String email, String senha);
+	public Usuario findByEmailAndPassword(String email, String senha);
 	
 	/* Buscar por email e senha =  neste caso para fazer o login */
 	@Query("SELECT u FROM User u WHERE u.email = ?1 AND u.password = ?2")
-	public Optional<User> login(String email, String password);
+	public Optional<Usuario> login(String email, String password);
 
 
 

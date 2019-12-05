@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.maia.course.domain.Request;
 import com.maia.course.domain.RequestStage;
-import com.maia.course.domain.User;
+import com.maia.course.domain.Usuario;
 import com.maia.course.domain.enums.RequestState;
 import com.maia.course.domain.enums.Role;
 import com.maia.course.service.RequestService;
@@ -35,7 +35,7 @@ public class SpringCourseApiApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		User u = new User(null, "Dowglas Maia", "dowglasmaia@live.com", "123", Role.ADMINISTRADOR);
+		Usuario u = new Usuario(null, "Dowglas Maia", "dowglasmaia@live.com", "123", Role.ADMINISTRADOR);
 		userService.save(u);
 
 		Request rq1 = new Request(null, "Vendas", "Vendas Avista", new Date(System.currentTimeMillis()),

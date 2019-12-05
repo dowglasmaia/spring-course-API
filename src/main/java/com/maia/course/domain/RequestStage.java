@@ -43,14 +43,14 @@ public class RequestStage implements Serializable {
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "user_id", nullable = false)
-	private User user;
+	private Usuario user;
 
 	public RequestStage() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public RequestStage(Long id, String description, Date realizationDate, RequestState state, Request request,
-			User user) {
+			Usuario user) {
 		super();
 		this.id = id;
 		this.description = description;
@@ -100,11 +100,11 @@ public class RequestStage implements Serializable {
 		this.request = request;
 	}
 
-	public User getUser() {
+	public Usuario getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(Usuario user) {
 		this.user = user;
 	}
 

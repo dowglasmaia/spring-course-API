@@ -44,7 +44,7 @@ public class Request implements Serializable {
 
 	@ManyToOne // Varions Pedidos para UM Usuario
 	@JoinColumn(name = "user_id", nullable = false)
-	private User user;
+	private Usuario user;
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "request")
@@ -54,7 +54,7 @@ public class Request implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Request(Long id, String subect, String description, Date creationDate, RequestState state, User user) {
+	public Request(Long id, String subect, String description, Date creationDate, RequestState state, Usuario user) {
 		super();
 		this.id = id;
 		this.subect = subect;
@@ -104,11 +104,11 @@ public class Request implements Serializable {
 		this.state = state;
 	}
 
-	public User getUser() {
+	public Usuario getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(Usuario user) {
 		this.user = user;
 	}
 

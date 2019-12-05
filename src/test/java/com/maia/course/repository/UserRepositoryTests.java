@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.maia.course.domain.User;
+import com.maia.course.domain.Usuario;
 import com.maia.course.domain.enums.Role;
 
 /* 
@@ -33,8 +33,8 @@ public class UserRepositoryTests {
 	@Test
 	void AsaveTest() {
 
-		User u = new User(null, "Dowglas", "dowglasmaia@live", "123", Role.ADMINISTRADOR);
-		User newUser = repository.save(u);
+		Usuario u = new Usuario(null, "Dowglas", "dowglasmaia@live", "123", Role.ADMINISTRADOR);
+		Usuario newUser = repository.save(u);
 
 		assertThat(newUser.getId()).isEqualTo(2L); // testa para verifiar se o id é 1
 	}
