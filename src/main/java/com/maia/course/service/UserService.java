@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.maia.course.domain.Usuario;
+import com.maia.course.exceptions.NotFoundException;
 import com.maia.course.repository.UserRepository;
 import com.maia.course.service.util.HashUtil;
 
@@ -46,7 +47,7 @@ public class UserService implements UserDetailsService {
 	// getById
 	public Usuario getById(Long id) {
 		Optional<Usuario> result = repository.findById(id);
-		return result.get();
+		return result.orElseThrow(() -> new NotFoundException("Ussário não encontrado para o Id: "+ id));
 	}
 
 	// List
