@@ -35,7 +35,7 @@ public class SpringCourseApiApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		Usuario u = new Usuario(null, "Dowglas Maia", "dowglasmaia@live.com", "123", Role.ADMINISTRADOR);
+		Usuario u = new Usuario(null, "Dowglas Maia", "dowglasmaia@live.com", "123456789", Role.ADMINISTRADOR);
 		userService.save(u);
 
 		Request rq1 = new Request(null, "Vendas", "Vendas Avista", new Date(System.currentTimeMillis()),
