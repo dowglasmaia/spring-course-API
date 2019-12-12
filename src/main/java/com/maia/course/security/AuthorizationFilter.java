@@ -35,14 +35,13 @@ public class AuthorizationFilter extends OncePerRequestFilter {
 		String jwt = request.getHeader(HttpHeaders.AUTHORIZATION);
 
 		/** se o teoken for nulo ou não inicar com Bearer */
-		if (jwt == null || !jwt.startsWith(SecurityConstants.JWT_PROVIDER)) {
-			ApiError apiError = new ApiError(HttpStatus.UNAUTHORIZED.value(), SecurityConstants.JWT_INVALID_MSG,
-					new Date());
+		if (jwt == null /* || !jwt.startsWith(SecurityConstants.JWT_PROVIDER) */ ) {
+			ApiError apiError = new ApiError(HttpStatus.UNAUTHORIZED.value(), SecurityConstants.JWT_INVALID_MSG, new Date());
+			
 			this.writerMsg(apiError, response);
 			return;
 		}
-
-		jwt = jwt.replace(SecurityConstants.JWT_PROVIDER, "");
+		jwt = jwt.replace(SecurityConstants.JWT_PROVIDER, ""); //remove o nome Bearer do token
 
 		try {
 			Claims claims = new JwtManager().parseToken(jwt);

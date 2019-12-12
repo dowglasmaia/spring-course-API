@@ -27,7 +27,7 @@ public class JwtManager {
 	}
 	
 	
-	//RETORNA O PLAYLOAD	
+	// validando RETORNA O PLAYLOAD	
 	public Claims parseToken(String jtw) throws JwtException {
 		Claims claims = Jwts.parser()
 				.setSigningKey(SecurityConstants.API_KEY.getBytes())
@@ -37,4 +37,5 @@ public class JwtManager {
 	}
 	
 	
+		
 }
